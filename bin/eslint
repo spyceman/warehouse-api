@@ -1,0 +1,26 @@
+#!/bin/sh
+
+set -x # echo on
+set -e # exit immediately on error
+
+# HACK: Gitlab has got some problems with git commands connected with branch name.
+if [ "$CI" ]; then
+  LAST_COMMIT_REF="$CI_COMMIT_SHA"
+else
+  LAST_COMMIT_REF="$(git branch --show-current)"
+fi
+
+echo "Searching \"$LAST_COMMIT_REF\" commit changes..."
+# This script uses changes from the last commit, commit your changes to use EsLint locally.
+CMD="git show --stat --name-only --pretty="" --diff-filter=d $LAST_COMMIT_REF | grep -iE '.ts$'"
+if [ "$(command -v sed)" ]; then
+  CMD="$CMD | sed 's/.*/\"&\"/'"
+fi
+
+DIFF_FILES=$(eval "$CMD")
+if [ -z "$DIFF_FILES" ]; then
+  echo "No files were changed."
+  exit 0
+fi
+
+eval "yarn run eslint $(echo $DIFF_FILES) $(echo "$@")"

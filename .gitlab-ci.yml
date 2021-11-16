@@ -2,6 +2,7 @@ image: node:alpine
 
 stages:
   - base
+  - lint
 
 variables:
   # Gitlab
@@ -25,4 +26,12 @@ build:
     - echo "$CI_REGISTRY_PASSWORD" | docker login -u $CI_REGISTRY_USER --password-stdin $CI_REGISTRY
   script:
     - bin/ci/build-base-image
-    
+
+lint:
+  stage: lint
+  image: registry.gitlab.com/sg-soft/inspector/ci:latest
+  <<: *only_merge_requests
+  <<: *interruptible
+  script:
+    - bin/eslint  
+     
