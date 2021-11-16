@@ -1,0 +1,14 @@
+#!/bin/sh
+
+set -x # echo on
+set -e # exit immediately on error
+
+FALLBACK_BASE_IMAGE=node:alpine
+RESULT_IMAGE=registry.gitlab.com/sg-soft/inspector/ci
+DOCKERFILE=Dockerfile
+
+docker pull $FALLBACK_BASE_IMAGE
+
+docker build -t $RESULT_IMAGE -f $DOCKERFILE . 
+  
+docker push $RESULT_IMAGE

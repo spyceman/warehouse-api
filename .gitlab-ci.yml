@@ -1,0 +1,28 @@
+image: node:alpine
+
+stages:
+  - base
+
+variables:
+  # Gitlab
+  FF_GITLAB_REGISTRY_HELPER_IMAGE: "1"
+  # Docker
+  GITLAB_USER: gitlab-ci-token
+
+.only_merge_requests: &only_merge_requests
+  only:
+    - merge_requests
+
+.interruptible: &interruptible
+  interruptible: true
+
+build:
+  stage: base
+  image: docker:19.03.14
+  services:
+    - docker:20-dind
+  before_script:
+    - echo "$CI_REGISTRY_PASSWORD" | docker login -u $CI_REGISTRY_USER --password-stdin $CI_REGISTRY
+  script:
+    - bin/ci/build-base-image
+    
