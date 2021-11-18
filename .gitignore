@@ -1,8 +1,10 @@
 # compiled output
 /dist
 /node_modules
-
+config.toml
 .env
+gitlab-runner.exe
+
 
 # Logs
 logs

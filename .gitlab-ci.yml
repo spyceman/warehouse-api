@@ -3,6 +3,7 @@ image: node:alpine
 stages:
   - base
   - lint
+  - test
 
 variables:
   # Gitlab
@@ -27,11 +28,21 @@ build:
   script:
     - bin/ci/build-base-image
 
-lint:
+eslint:
   stage: lint
   image: registry.gitlab.com/sg-soft/inspector/ci:latest
   <<: *only_merge_requests
   <<: *interruptible
   script:
-    - bin/eslint  
-     
+    - bin/eslint
+
+jest:
+  stage: test
+  image: registry.gitlab.com/sg-soft/inspector/ci:latest
+  <<: *only_merge_requests
+  <<: *interruptible   
+  script:
+    - 'yarn add jest --dev'
+    - 'yarn run jest -v'
+    - 'yarn run test'
+  needs: [eslint]
