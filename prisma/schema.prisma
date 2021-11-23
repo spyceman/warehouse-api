@@ -7,5 +7,24 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL")
+  url      = "postgresql://postgres:postgres@postgres:5432/inspector?schema=public"
+}
+
+model User {
+  id                 Int    @id @default(autoincrement())
+  email              String @unique
+  encrypted_password String
+  organization_id    String
+  role               Role   @default(employee)
+  created_at         String @default("0")
+  created_by         String @default("0")
+  updated_at         String @default("0")
+  updated_by         String @default("0")
+  changed_by         String @default("0")
+}
+
+enum Role {
+  employee
+  admin
+  super_admin
 }
