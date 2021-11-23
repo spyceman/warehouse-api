@@ -4,6 +4,7 @@ stages:
   - base
   - lint
   - test
+  - coverage
 
 variables:
   # Gitlab
@@ -43,6 +44,19 @@ jest:
   <<: *interruptible   
   script:
     - 'yarn add jest --dev'
-    - 'yarn run jest -v'
     - 'yarn run test'
   needs: [eslint]
+
+coverage:
+  stage: coverage
+  image: registry.gitlab.com/sg-soft/inspector/ci:latest
+  <<: *only_merge_requests
+  <<: *interruptible
+  script:
+    - 'yarn add jest --dev'
+    - 'yarn run test:cov'
+  artifacts:
+    paths:
+      - "coverage/"
+  needs: [jest]
+

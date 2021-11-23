@@ -10,6 +10,8 @@ RUN yarn install
 
 COPY . .
 
+RUN npx prisma generate
+
 RUN yarn run build
 
 EXPOSE 3000
