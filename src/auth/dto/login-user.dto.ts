@@ -5,5 +5,5 @@ export class LoginUserDto {
   readonly email: string;
   
   @ApiProperty({ example: 'password' })
-  readonly password: string;
+  readonly encrypted_password: string;
 }
