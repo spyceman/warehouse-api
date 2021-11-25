@@ -1,0 +1,6 @@
+-- AlterTable
+ALTER TABLE "User" ALTER COLUMN "changed_by" SET DEFAULT E'0',
+ALTER COLUMN "created_at" SET DEFAULT E'0',
+ALTER COLUMN "created_by" SET DEFAULT E'0',
+ALTER COLUMN "updated_at" SET DEFAULT E'0',
+ALTER COLUMN "updated_by" SET DEFAULT E'0';

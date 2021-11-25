@@ -15,10 +15,10 @@
     "start:prod": "node dist/main",
     "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
     "test": "jest --rootDir=./",
-    "test:watch": "jest --rootDir=./ --watch",
-    "test:cov": "jest --rootDir=./ --coverage",
+    "test:watch": "jest --rootDir=test --watch",
+    "test:cov": "jest --rootDir=test --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand --rootDir=test ",
-    "test:e2e": "jest --rootDir=./ --config ./test/jest-e2e.json"
+    "test:e2e": "jest --rootDir=test --config ./test/jest-e2e.json"
   },
   "dependencies": {
     "@nestjs/common": "^8.0.0",

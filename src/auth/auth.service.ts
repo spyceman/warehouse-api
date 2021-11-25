@@ -23,7 +23,7 @@ export class AuthService {
     });
     if (user) {
       const isPasswordMatching = await bcrypt.compare(
-        dto.encrypted_password,
+        dto.password,
         user.encrypted_password,
       );
       if (user && isPasswordMatching) {
@@ -43,14 +43,12 @@ export class AuthService {
       where: { email: dto.email },
     });
     if (!check) {
-      dto.encrypted_password = await bcrypt.hash(dto.encrypted_password, 10);
+      dto.password = await bcrypt.hash(dto.password, 10);
       this.prisma.user.create({
         data: {
           email: dto.email,
-          encrypted_password: dto.encrypted_password,
+          encrypted_password: dto.password,
           organization_id: dto.organization_id,
-          created_at: new Date(),
-          updated_at: new Date(),
         },
       });
       return this.generateToken(dto);
@@ -59,7 +57,7 @@ export class AuthService {
     }
   }
 
-  private async generateToken(user: LoginUserDto) {
+  private async generateToken(user) {
     const payload = {
       email: user.email,
     };
