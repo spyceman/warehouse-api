@@ -1,23 +1,22 @@
 import { Injectable } from '@nestjs/common';
 import { CreateOrganizationDto } from './dto/create-organization.dto';
 import { PrismaService } from '../prisma.service';
-import { LoginUserDto } from '../auth/dto/login-user.dto';
 import { UpdateOrganizationDto } from './dto/update-organization.dto';
 
 @Injectable()
 export class OrganizationsService {
   constructor(private prisma: PrismaService) {}
 
-  async createOrganization(organization: CreateOrganizationDto, currentUser: LoginUserDto) {
+  async createOrganization(organization: CreateOrganizationDto, userId: string) {
     return this.prisma.organizations.create({
       data: {
         name: organization.name,
         location_id: organization.location_id,
         created_at: new Date(),
-        created_by: currentUser.email,
+        created_by: userId,
         updated_at: new Date(),
-        updated_by: currentUser.email,
-        changed_by: currentUser.email,
+        updated_by: userId,
+        changed_by: userId,
       },
     });
   }
@@ -32,7 +31,7 @@ export class OrganizationsService {
     });
   }
 
-  async updateOrganization(id: string, organization: UpdateOrganizationDto, currentUser: LoginUserDto) {
+  async updateOrganization(id: string, organization: UpdateOrganizationDto, userId: string) {
     return this.prisma.organizations.update({
       where: {
         id: Number(id),
@@ -41,8 +40,8 @@ export class OrganizationsService {
         name: organization.name,
         location_id: organization.location_id,
         updated_at: new Date(),
-        updated_by: currentUser.email,
-        changed_by: currentUser.email,
+        updated_by: userId,
+        changed_by: userId,
       },
     });
   }

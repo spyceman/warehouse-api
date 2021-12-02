@@ -7,6 +7,6 @@ export class CreateUserDto {
   @ApiProperty({ example: 'password' })
     encrypted_password: string;
 
-  @ApiProperty({ example: 'organization_id' })
+  @ApiProperty({ example: 123 })
   readonly organization_id: number;
 }
