@@ -1,21 +1,25 @@
 import { Injectable } from '@nestjs/common';
 import { CreateOrganizationDto } from './dto/create-organization.dto';
 import { PrismaService } from '../prisma.service';
+import { JwtService } from '@nestjs/jwt';
+import { LoginUserDto } from 'src/auth/dto/login-user.dto';
+import { UpdateOrganizationDto } from './dto/update-organization.dto';
 
 @Injectable()
 export class OrganizationsService {
-  constructor(private prisma: PrismaService) {}
+  constructor(private prisma: PrismaService,
+    private jwt: JwtService) {}
 
-  async createOrganization(organization: CreateOrganizationDto) {
+  async createOrganization(organization: CreateOrganizationDto, currentUser: LoginUserDto) {
     return this.prisma.organizations.create({
       data: {
         name: organization.name,
         location_id: organization.location_id,
-        created_at: organization.created_at,
-        created_by: organization.created_by,
-        updated_at: organization.created_at,
-        updated_by: organization.updated_by,
-        changed_by: organization.changed_by,
+        created_at: new Date(),
+        created_by: currentUser.email,
+        updated_at: new Date(),
+        updated_by: currentUser.email,
+        changed_by: currentUser.email,
       },
     });
   }
@@ -30,7 +34,7 @@ export class OrganizationsService {
     });
   }
 
-  async updateOrganization(id: string, organization: CreateOrganizationDto) {
+  async updateOrganization(id: string, organization: UpdateOrganizationDto, currentUser: LoginUserDto) {
     return this.prisma.organizations.update({
       where: {
         id: Number(id),
@@ -38,11 +42,9 @@ export class OrganizationsService {
       data: {
         name: organization.name,
         location_id: organization.location_id,
-        created_at: organization.created_at,
-        created_by: organization.created_by,
-        updated_at: organization.created_at,
-        updated_by: organization.updated_by,
-        changed_by: organization.changed_by,
+        updated_at: new Date(),
+        updated_by: currentUser.email,
+        changed_by: currentUser.email,
       },
     });
   }

@@ -6,11 +6,17 @@ import {
   Param,
   Get,
   Put,
+  UseGuards,
 } from '@nestjs/common';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { LoginUserDto } from 'src/auth/dto/login-user.dto';
+import { AuthGuard } from 'src/auth/guards/auth.guard';
+import { CurrentUser } from './current-user.decorator';
 import { CreateOrganizationDto } from './dto/create-organization.dto';
+import { UpdateOrganizationDto } from './dto/update-organization.dto';
 import { OrganizationsService } from './organizations.service';
 
+UseGuards(AuthGuard);
 @ApiTags('Organizations CRUD')
 @Controller('organizations')
 export class OrganizationsController {
@@ -21,8 +27,8 @@ export class OrganizationsController {
   @ApiOperation({ summary: 'Creating Organization' })
   @ApiResponse({ status: 201, type: CreateOrganizationDto })
   @Post()
-  createOrganization(@Body() organization: CreateOrganizationDto) {
-    return this.organizationService.createOrganization(organization);
+  createOrganization(@Body() organization: CreateOrganizationDto, @CurrentUser() currentUser: LoginUserDto) {
+    return this.organizationService.createOrganization(organization, currentUser);
   }
 
   @ApiOperation({ summary: 'Getting organization by id' })
@@ -42,8 +48,8 @@ export class OrganizationsController {
   @ApiOperation({ summary: 'Updating organization by id' })
   @ApiResponse({ status: 200 })
   @Put('/:id')
-  updateOrganization(@Param('id') id: string, @Body() organization: CreateOrganizationDto) {
-    return this.organizationService.updateOrganization(id, organization);
+  updateOrganization(@Param('id') id: string, @Body() organization: UpdateOrganizationDto, @CurrentUser() currentUser: LoginUserDto) {
+    return this.organizationService.updateOrganization(id, organization, currentUser);
   }
 
   @ApiOperation({ summary: 'Deleting organization by id' })
