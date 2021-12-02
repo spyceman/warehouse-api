@@ -9,8 +9,8 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
-import { LoginUserDto } from 'src/auth/dto/login-user.dto';
-import { AuthGuard } from 'src/auth/guards/auth.guard';
+import { LoginUserDto } from '../auth/dto/login-user.dto';
+import { AuthGuard } from '../auth/guards/auth.guard';
 import { CurrentUser } from './current-user.decorator';
 import { CreateOrganizationDto } from './dto/create-organization.dto';
 import { UpdateOrganizationDto } from './dto/update-organization.dto';

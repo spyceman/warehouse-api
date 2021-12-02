@@ -1,14 +1,12 @@
 import { Injectable } from '@nestjs/common';
 import { CreateOrganizationDto } from './dto/create-organization.dto';
 import { PrismaService } from '../prisma.service';
-import { JwtService } from '@nestjs/jwt';
-import { LoginUserDto } from 'src/auth/dto/login-user.dto';
+import { LoginUserDto } from '../auth/dto/login-user.dto';
 import { UpdateOrganizationDto } from './dto/update-organization.dto';
 
 @Injectable()
 export class OrganizationsService {
-  constructor(private prisma: PrismaService,
-    private jwt: JwtService) {}
+  constructor(private prisma: PrismaService) {}
 
   async createOrganization(organization: CreateOrganizationDto, currentUser: LoginUserDto) {
     return this.prisma.organizations.create({
