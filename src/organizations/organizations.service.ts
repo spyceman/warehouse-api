@@ -7,7 +7,7 @@ import { UpdateOrganizationDto } from './dto/update-organization.dto';
 export class OrganizationsService {
   constructor(private prisma: PrismaService) {}
 
-  async createOrganization(organization: CreateOrganizationDto, userId: string) {
+  async createOrganization(organization: CreateOrganizationDto, userId: number) {
     return this.prisma.organizations.create({
       data: {
         name: organization.name,
@@ -25,16 +25,16 @@ export class OrganizationsService {
     return this.prisma.organizations.findMany();
   }
 
-  async getOrganizationById(id: string) {
+  async getOrganizationById(id: number) {
     return this.prisma.organizations.findUnique({
-      where: { id: Number(id) },
+      where: { id: id },
     });
   }
 
-  async updateOrganization(id: string, organization: UpdateOrganizationDto, userId: string) {
+  async updateOrganization(id: number, organization: UpdateOrganizationDto, userId: number) {
     return this.prisma.organizations.update({
       where: {
-        id: Number(id),
+        id: id,
       },
       data: {
         name: organization.name,
@@ -46,7 +46,7 @@ export class OrganizationsService {
     });
   }
 
-  async deleteOrganization(id: string) {
-    return this.prisma.organizations.delete({ where: { id: Number(id) } });
+  async deleteOrganization(id: number) {
+    return this.prisma.organizations.delete({ where: { id: id } });
   }
 }

@@ -14,12 +14,12 @@ model User {
   id                   Int                    @id @default(autoincrement())
   email                String                 @unique
   encrypted_password   String
-  organization_id      Int                    
+  organization_id      Int
   created_at           DateTime               @default(now())
-  created_by           String                 @default("")
+  created_by           Int                    @default(0)
   updated_at           DateTime               @default(now())
-  updated_by           String                 @default("")
-  changed_by           String                 @default("")
+  updated_by           Int                    @default(0)
+  changed_by           Int                    @default(0)
   role                 Role                   @default(employee)
   organization         Organizations          @relation(fields: [organization_id], references: [id])
   Warehouse_operation1 Warehouse_operations[] @relation("user")
@@ -28,30 +28,30 @@ model User {
 
 model Organizations {
   id                   Int                    @id @default(autoincrement())
-  name                 String                 
-  location_id          Int                    
+  name                 String
+  location_id          Int
   created_at           DateTime               @default(now())
-  created_by           String                 @default("")
+  created_by           Int                    @default(0)
   updated_at           DateTime               @default(now())
-  updated_by           String                 @default("")
-  changed_by           String                 @default("")
+  updated_by           Int                    @default(0)
+  changed_by           Int                    @default(0)
   User                 User[]
-  Price_lists          Price_lists[]          
+  Price_lists          Price_lists[]
   Warehouses           Warehouses[]
   Warehouse_operations Warehouse_operations[]
 }
 
 model Price_lists {
   id                  Int                   @id @default(autoincrement())
-  name                String                
+  name                String
   description         String
-  organization_id     Int                   
-  service_location_id Int                   @default(1)             
+  organization_id     Int
+  service_location_id Int                   @default(1)
   created_at          DateTime              @default(now())
-  created_by          String                @default("")
+  created_by          Int                   @default(0)
   updated_at          DateTime              @default(now())
-  updated_by          String                @default("")
-  changed_by          String                @default("")
+  updated_by          Int                   @default(0)
+  changed_by          Int                   @default(0)
   organization        Organizations         @relation(fields: [organization_id], references: [id])
   Price_list_items    Price_list_items[]
   Price_list_settings Price_list_settings[]
@@ -60,13 +60,13 @@ model Price_lists {
 
 model Price_list_items {
   id                        Int                         @id @default(autoincrement())
-  price_list_id             Int                         
+  price_list_id             Int
   price                     Float
   created_at                DateTime                    @default(now())
-  created_by                String                      @default("")
+  created_by                Int                         @default(0)
   updated_at                DateTime                    @default(now())
-  updated_by                String                      @default("")
-  changed_by                String                      @default("")
+  updated_by                Int                         @default(0)
+  changed_by                Int                         @default(0)
   price_list                Price_lists                 @relation(fields: [price_list_id], references: [id])
   Warehouse_products        Warehouse_products[]
   Warehouse_operation_items Warehouse_operation_items[]
@@ -77,23 +77,23 @@ model Price_list_settings {
   price_list_id Int
   permission    Permission  @default(everybody)
   created_at    DateTime    @default(now())
-  created_by    String      @default("")
+  created_by    Int         @default(0)
   updated_at    DateTime    @default(now())
-  updated_by    String      @default("")
-  changed_by    String      @default("")
+  updated_by    Int         @default(0)
+  changed_by    Int         @default(0)
   price_list    Price_lists @relation(fields: [price_list_id], references: [id])
 }
 
 model Warehouse_products {
   id           Int              @id @default(autoincrement())
-  product_id   Int              
+  product_id   Int
   count        Float
   warehouse_id Int
   created_at   DateTime         @default(now())
-  created_by   String           @default("")
+  created_by   Int              @default(0)
   updated_at   DateTime         @default(now())
-  updated_by   String           @default("")
-  changed_by   String           @default("")
+  updated_by   Int              @default(0)
+  changed_by   Int              @default(0)
   product      Price_list_items @relation(fields: [product_id], references: [id])
   warehouse    Warehouses       @relation(fields: [warehouse_id], references: [id])
 }
@@ -101,7 +101,7 @@ model Warehouse_products {
 model Warehouse_operations {
   id                        Int                         @id @default(autoincrement())
   type                      Type                        @default(sale)
-  organization_id           Int 
+  organization_id           Int
   service_location_id       Int                         @default(1)
   date                      DateTime                    @default(now())
   document                  String
@@ -114,10 +114,10 @@ model Warehouse_operations {
   reservation_id            Int
   created_manually          Boolean                     @default(false)
   created_at                DateTime                    @default(now())
-  created_by                String                      @default("")
+  created_by                Int                         @default(0)
   updated_at                DateTime                    @default(now())
-  updated_by                String                      @default("")
-  changed_by                String                      @default("")
+  updated_by                Int                         @default(0)
+  changed_by                Int                         @default(0)
   user                      User                        @relation("user", fields: [user_id], references: [id])
   responsible_user          User                        @relation("responsible_user", fields: [responsible_user_id], references: [id])
   organization              Organizations               @relation(fields: [organization_id], references: [id])
@@ -135,17 +135,17 @@ model Warehouse_operation_items {
   warehouse_operation_id Int
   discount               Float
   created_at             DateTime             @default(now())
-  created_by             String               @default("")
+  created_by             Int                  @default(0)
   updated_at             DateTime             @default(now())
-  updated_by             String               @default("")
-  changed_by             String               @default("")
+  updated_by             Int                  @default(0)
+  changed_by             Int                  @default(0)
   product                Price_list_items     @relation(fields: [product_id], references: [id])
   warehouse_operation    Warehouse_operations @relation(fields: [warehouse_operation_id], references: [id])
 }
 
 model Warehouses {
   id                   Int                    @id @default(autoincrement())
-  name                 String                 
+  name                 String
   service_location_id  Int                    @default(1)
   organization_id      Int
   track_consumables    Boolean                @default(false)
@@ -153,10 +153,10 @@ model Warehouses {
   default_for_sale     Boolean                @default(false)
   price_list_id        Int
   created_at           DateTime               @default(now())
-  created_by           String                 @default("")
+  created_by           Int                    @default(0)
   updated_at           DateTime               @default(now())
-  updated_by           String                 @default("")
-  changed_by           String                 @default("")
+  updated_by           Int                    @default(0)
+  changed_by           Int                    @default(0)
   organization         Organizations          @relation(fields: [organization_id], references: [id])
   price_list           Price_lists            @relation(fields: [price_list_id], references: [id])
   Warehouse_products   Warehouse_products[]

@@ -3570,6 +3570,13 @@
     "slash" "^3.0.0"
     "stack-utils" "^2.0.3"
 
+"jest-mock-extended@^2.0.4":
+  "integrity" "sha512-MgL3B3GjURQFjjPGqbCANydA5BFNPygv0mYp4Tjfxohh9MWwxxX8Eq2p6ncCt/Vt+RAnaLlDaI7gwrDRD7Pt9A=="
+  "resolved" "https://registry.npmjs.org/jest-mock-extended/-/jest-mock-extended-2.0.4.tgz"
+  "version" "2.0.4"
+  dependencies:
+    "ts-essentials" "^7.0.3"
+
 "jest-mock@^27.3.0":
   "integrity" "sha512-ziZiLk0elZOQjD08bLkegBzv5hCABu/c8Ytx45nJKkysQwGaonvmTxwjLqEA4qGdasq9o2I8/HtdGMNnVsMTGw=="
   "resolved" "https://registry.npmjs.org/jest-mock/-/jest-mock-27.3.0.tgz"
@@ -3757,7 +3764,7 @@
     "merge-stream" "^2.0.0"
     "supports-color" "^8.0.0"
 
-"jest@^27.0.0", "jest@^27.3.1":
+"jest@^24.0.0 || ^25.0.0 || ^26.0.0 || ^27.0.0", "jest@^27.0.0", "jest@^27.3.1":
   "integrity" "sha512-U2AX0AgQGd5EzMsiZpYt8HyZ+nSVIh5ujQ9CPp9EQZJMjXIiSZpJNweZl0swatKRoqHWgGKM3zaSwm4Zaz87ng=="
   "resolved" "https://registry.npmjs.org/jest/-/jest-27.3.1.tgz"
   "version" "27.3.1"
@@ -5329,6 +5336,11 @@
   "resolved" "https://registry.npmjs.org/tree-kill/-/tree-kill-1.2.2.tgz"
   "version" "1.2.2"
 
+"ts-essentials@^7.0.3":
+  "integrity" "sha512-8+gr5+lqO3G84KdiTSMRLtuyJ+nTBVRKuCrK4lidMPdVeEp0uqC875uE5NMcaA7YYMN7XsNiFQuMvasF8HT/xQ=="
+  "resolved" "https://registry.npmjs.org/ts-essentials/-/ts-essentials-7.0.3.tgz"
+  "version" "7.0.3"
+
 "ts-jest@^27.0.3":
   "integrity" "sha512-O41shibMqzdafpuP+CkrOL7ykbmLh+FqQrXEmV9CydQ5JBk0Sj0uAEF5TNNe94fZWKm3yYvWa/IbyV4Yg1zK2Q=="
   "resolved" "https://registry.npmjs.org/ts-jest/-/ts-jest-27.0.7.tgz"
@@ -5466,7 +5478,7 @@
   "resolved" "https://registry.npmjs.org/typedarray/-/typedarray-0.0.6.tgz"
   "version" "0.0.6"
 
-"typescript@*", "typescript@^3.4.5 || ^4.3.5", "typescript@^4.3.5", "typescript@>= 2.7", "typescript@>=2.7", "typescript@>=2.8.0 || >= 3.2.0-dev || >= 3.3.0-dev || >= 3.4.0-dev || >= 3.5.0-dev || >= 3.6.0-dev || >= 3.6.0-beta || >= 3.7.0-dev || >= 3.7.0-beta", "typescript@>=3.8 <5.0":
+"typescript@*", "typescript@^3.0.0 || ^4.0.0", "typescript@^3.4.5 || ^4.3.5", "typescript@^4.3.5", "typescript@>= 2.7", "typescript@>=2.7", "typescript@>=2.8.0 || >= 3.2.0-dev || >= 3.3.0-dev || >= 3.4.0-dev || >= 3.5.0-dev || >= 3.6.0-dev || >= 3.6.0-beta || >= 3.7.0-dev || >= 3.7.0-beta", "typescript@>=3.7.0", "typescript@>=3.8 <5.0":
   "integrity" "sha512-DqGhF5IKoBl8WNf8C1gu8q0xZSInh9j1kJJMqT3a94w1JzVaBU4EXOSMrz9yDqMT0xt3selp83fuFMQ0uzv6qA=="
   "resolved" "https://registry.npmjs.org/typescript/-/typescript-4.4.4.tgz"
   "version" "4.4.4"

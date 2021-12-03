@@ -34,14 +34,14 @@ export class AuthService {
     throw new UnauthorizedException({ message: 'Wrong credentials provided' });
   }
 
-  async login(dto: LoginUserDto, ctx: ExecutionContext) {
+  async login(dto: LoginUserDto, ctx?: ExecutionContext) {
     const user = await this.validateUser(dto);
-    const req = ctx.switchToHttp().getRequest();
+    const req = ctx!.switchToHttp().getRequest();
     req.session.user = dto;
     return this.generateToken(user);
   }
 
-  async registration(dto: CreateUserDto, ctx: ExecutionContext) {
+  async registration(dto: CreateUserDto, ctx?: ExecutionContext) {
     const check = await this.prisma.user.findUnique({
       where: { email: dto.email },
     });
@@ -56,7 +56,7 @@ export class AuthService {
           updated_at: new Date(),
         },
       });
-      const req = ctx.switchToHttp().getRequest();
+      const req = ctx!.switchToHttp().getRequest();
       req.session.user = dto;
       return this.generateToken(dto);
     } else {

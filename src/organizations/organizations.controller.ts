@@ -26,14 +26,14 @@ export class OrganizationsController {
   @ApiOperation({ summary: 'Creating Organization' })
   @ApiResponse({ status: 201, type: CreateOrganizationDto })
   @Post()
-  createOrganization(@Body() organization: CreateOrganizationDto, @CurrentUser() userId: string) {
+  createOrganization(@Body() organization: CreateOrganizationDto, @CurrentUser() userId: number) {
     return this.organizationService.createOrganization(organization, userId);
   }
 
   @ApiOperation({ summary: 'Getting organization by id' })
   @ApiResponse({ status: 200 })
   @Get('/:id')
-  getOrganizationById(@Param('id') id: string) {
+  getOrganizationById(@Param('id') id: number) {
     return this.organizationService.getOrganizationById(id);
   }
 
@@ -47,14 +47,14 @@ export class OrganizationsController {
   @ApiOperation({ summary: 'Updating organization by id' })
   @ApiResponse({ status: 200 })
   @Put('/:id')
-  updateOrganization(@Param('id') id: string, @Body() organization: UpdateOrganizationDto, @CurrentUser() userId: string) {
+  updateOrganization(@Param('id') id: number, @Body() organization: UpdateOrganizationDto, @CurrentUser() userId: number) {
     return this.organizationService.updateOrganization(id, organization, userId);
   }
 
   @ApiOperation({ summary: 'Deleting organization by id' })
   @ApiResponse({ status: 204 })
   @Delete('/:id')
-  deleteOrganization(@Param('id') id: string) {
+  deleteOrganization(@Param('id') id: number) {
     return this.organizationService.deleteOrganization(id);
   }
 }
