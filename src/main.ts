@@ -17,7 +17,7 @@ async function bootstrap() {
   SwaggerModule.setup('/api', app, document);
   app.use(
     session({
-      secret: 'secret',
+      secret: process.env.SESSION || 'secret',
       resave: false,
       saveUninitialized: false,
     }),
