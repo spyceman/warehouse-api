@@ -1,4 +1,4 @@
-import prismaMock from '../src/singleton';
+import prismaMock from './singleton';
 
 
 interface CreateOrganization {

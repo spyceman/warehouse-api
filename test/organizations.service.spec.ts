@@ -4,8 +4,8 @@ import {
   getOrganizationById,
   updateOrganization,
   deleteOrganization,
-} from '../src/functions-without-context';
-import prismaMock from '../src/singleton';
+} from './mocks/functions-without-context';
+import prismaMock from './mocks/singleton';
 
 describe('OrganizationsService', () => {
   afterAll(() => {
