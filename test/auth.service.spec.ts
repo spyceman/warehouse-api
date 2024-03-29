@@ -1,6 +1,6 @@
 import { JwtModule } from '@nestjs/jwt';
 import { Test, TestingModule } from '@nestjs/testing';
-import { PrismaService } from '../src/auth/prisma.service';
+import { PrismaService } from '../src/prisma.service';
 import { AuthService } from '../src/auth/auth.service';
 
 describe('AuthService', () => {

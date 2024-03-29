@@ -1,4 +1,4 @@
-import { PrismaClient, Role } from '@prisma/client';
+import { Price_lists, Price_list_items, PrismaClient, Role, Warehouses, Warehouse_operations } from '@prisma/client';
 import * as faker from 'faker';
 const prisma = new PrismaClient();
 
@@ -11,10 +11,10 @@ export async function main() {
   });
 
   const organizations = [mainOrganization];
-  const priceLists = [];
-  const warehouses = [];
-  const priceListItems = [];
-  const warehouseOperations = [];
+  const priceLists: Price_lists[] = [];
+  const warehouses: Warehouses[] = [];
+  const priceListItems: Price_list_items[] = [];
+  const warehouseOperations: Warehouse_operations[] = [];
 
   const users = [
     await prisma.user.create({
@@ -44,8 +44,8 @@ export async function main() {
         },
       }),
     );
-    
-    let numberOfUsers = faker.datatype.number(20) + 1;    
+
+    let numberOfUsers = faker.datatype.number(20) + 1;
     for (let j = 0; j < numberOfUsers; j++) {
       users.push(
         await prisma.user.create({
@@ -58,7 +58,7 @@ export async function main() {
       );
     }
 
-    let numberOfPriceLists = faker.datatype.number(10) + 1;    
+    let numberOfPriceLists = faker.datatype.number(10) + 1;
     for (let n = 0; n < numberOfPriceLists; n++) {
       priceLists.push(
         await prisma.price_lists.create({
@@ -75,7 +75,7 @@ export async function main() {
         },
       });
 
-      let numberOfPriceListItems = faker.datatype.number(50) + 1;      
+      let numberOfPriceListItems = faker.datatype.number(50) + 1;
       for (let m = 0; m < numberOfPriceListItems; m++) {
         priceListItems.push(
           await prisma.price_list_items.create({
@@ -110,7 +110,7 @@ export async function main() {
         },
       });
     }
-                        
+
     let filteredUsers = users.filter(
       (v) => v.organization_id === organizations[i].id,
     );
@@ -123,9 +123,8 @@ export async function main() {
       filteredWarehouses[Math.floor(Math.random() * filteredWarehouses.length)];
     let warehouse2 =
       filteredWarehouses[Math.floor(Math.random() * filteredWarehouses.length)];
-    let numberOfWarhouseOperations = faker.datatype.number(50) + 1;    
+    let numberOfWarhouseOperations = faker.datatype.number(50) + 1;
     let numberOfWarhouseOperationItems = faker.datatype.number(50) + 1;
-    
 
     for (let l = 0; l < numberOfWarhouseOperations; l++) {
       warehouseOperations.push(
